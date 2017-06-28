@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		27DAFA9A1F03194C00A3CD99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFA991F03194C00A3CD99 /* AppDelegate.swift */; };
-		27DAFA9C1F03194C00A3CD99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFA9B1F03194C00A3CD99 /* ViewController.swift */; };
+		27DAFA9C1F03194C00A3CD99 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFA9B1F03194C00A3CD99 /* MainViewController.swift */; };
 		27DAFA9F1F03194C00A3CD99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFA9D1F03194C00A3CD99 /* Main.storyboard */; };
 		27DAFAA11F03194C00A3CD99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAA01F03194C00A3CD99 /* Assets.xcassets */; };
 		27DAFAA41F03194C00A3CD99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAA21F03194C00A3CD99 /* LaunchScreen.storyboard */; };
+		27DAFAAD1F03EE4B00A3CD99 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAAB1F03EE4B00A3CD99 /* PickerViewController.swift */; };
+		27DAFAAE1F03EE4B00A3CD99 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */; };
+		27DAFAB01F03F67000A3CD99 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAAF1F03F67000A3CD99 /* StationCell.swift */; };
+		27DAFAB21F03F68900A3CD99 /* StationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAB11F03F68900A3CD99 /* StationCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		27DAFA961F03194C00A3CD99 /* Rozklad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rozklad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27DAFA991F03194C00A3CD99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27DAFA9B1F03194C00A3CD99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27DAFA9B1F03194C00A3CD99 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		27DAFA9E1F03194C00A3CD99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27DAFAA01F03194C00A3CD99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27DAFAA31F03194C00A3CD99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27DAFAA51F03194C00A3CD99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27DAFAAB1F03EE4B00A3CD99 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
+		27DAFAAF1F03F67000A3CD99 /* StationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
+		27DAFAB11F03F68900A3CD99 /* StationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				27DAFA991F03194C00A3CD99 /* AppDelegate.swift */,
-				27DAFA9B1F03194C00A3CD99 /* ViewController.swift */,
+				27DAFA9B1F03194C00A3CD99 /* MainViewController.swift */,
+				27DAFAAB1F03EE4B00A3CD99 /* PickerViewController.swift */,
+				27DAFAAF1F03F67000A3CD99 /* StationCell.swift */,
+				27DAFAB11F03F68900A3CD99 /* StationCell.xib */,
+				27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */,
 				27DAFA9D1F03194C00A3CD99 /* Main.storyboard */,
 				27DAFAA01F03194C00A3CD99 /* Assets.xcassets */,
 				27DAFAA21F03194C00A3CD99 /* LaunchScreen.storyboard */,
@@ -123,8 +135,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DAFAB21F03F68900A3CD99 /* StationCell.xib in Resources */,
 				27DAFAA41F03194C00A3CD99 /* LaunchScreen.storyboard in Resources */,
 				27DAFAA11F03194C00A3CD99 /* Assets.xcassets in Resources */,
+				27DAFAAE1F03EE4B00A3CD99 /* PickerViewController.xib in Resources */,
 				27DAFA9F1F03194C00A3CD99 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,7 +150,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27DAFA9C1F03194C00A3CD99 /* ViewController.swift in Sources */,
+				27DAFAAD1F03EE4B00A3CD99 /* PickerViewController.swift in Sources */,
+				27DAFA9C1F03194C00A3CD99 /* MainViewController.swift in Sources */,
+				27DAFAB01F03F67000A3CD99 /* StationCell.swift in Sources */,
 				27DAFA9A1F03194C00A3CD99 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +315,7 @@
 				27DAFAAA1F03194C00A3CD99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
