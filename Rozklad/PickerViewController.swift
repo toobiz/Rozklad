@@ -18,6 +18,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchString: String?
     var api: API?
     var stations: [AnyObject]?
+    var mainView: MainViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("TableView tapped")
+        mainView?.firstStationButton.titleLabel?.text = stations?[indexPath.row] as! String
         view.endEditing(true)
         dismiss(animated: true) {
             print("Picker closed")

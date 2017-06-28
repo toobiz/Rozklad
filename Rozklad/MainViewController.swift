@@ -17,6 +17,11 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -25,8 +30,7 @@ class MainViewController: UIViewController {
     
     @IBAction func didTapFirstStation(_ sender: Any) {
         let pickerView = PickerViewController()
-        
-//        navigationController?.pushViewController(pickerView, animated: true)
+        pickerView.mainView = self
         present(pickerView, animated: true) {
             
         }
