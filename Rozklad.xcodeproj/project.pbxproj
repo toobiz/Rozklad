@@ -16,6 +16,8 @@
 		27DAFAAE1F03EE4B00A3CD99 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */; };
 		27DAFAB01F03F67000A3CD99 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAAF1F03F67000A3CD99 /* StationCell.swift */; };
 		27DAFAB21F03F68900A3CD99 /* StationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAB11F03F68900A3CD99 /* StationCell.xib */; };
+		27DAFAB41F0458DC00A3CD99 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAB31F0458DC00A3CD99 /* API.swift */; };
+		27DAFAB61F045EFB00A3CD99 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAB51F045EFB00A3CD99 /* Station.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		27DAFAAF1F03F67000A3CD99 /* StationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
 		27DAFAB11F03F68900A3CD99 /* StationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationCell.xib; sourceTree = "<group>"; };
+		27DAFAB31F0458DC00A3CD99 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		27DAFAB51F045EFB00A3CD99 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +67,43 @@
 			isa = PBXGroup;
 			children = (
 				27DAFA991F03194C00A3CD99 /* AppDelegate.swift */,
-				27DAFA9B1F03194C00A3CD99 /* MainViewController.swift */,
-				27DAFAAB1F03EE4B00A3CD99 /* PickerViewController.swift */,
-				27DAFAAF1F03F67000A3CD99 /* StationCell.swift */,
-				27DAFAB11F03F68900A3CD99 /* StationCell.xib */,
-				27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */,
+				27DAFAB91F045F2500A3CD99 /* ViewControllers */,
+				27DAFAB81F045F1400A3CD99 /* API */,
+				27DAFAB71F045F0600A3CD99 /* Model */,
 				27DAFA9D1F03194C00A3CD99 /* Main.storyboard */,
 				27DAFAA01F03194C00A3CD99 /* Assets.xcassets */,
 				27DAFAA21F03194C00A3CD99 /* LaunchScreen.storyboard */,
 				27DAFAA51F03194C00A3CD99 /* Info.plist */,
 			);
 			path = Rozklad;
+			sourceTree = "<group>";
+		};
+		27DAFAB71F045F0600A3CD99 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27DAFAB51F045EFB00A3CD99 /* Station.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		27DAFAB81F045F1400A3CD99 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				27DAFAB31F0458DC00A3CD99 /* API.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		27DAFAB91F045F2500A3CD99 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				27DAFA9B1F03194C00A3CD99 /* MainViewController.swift */,
+				27DAFAAB1F03EE4B00A3CD99 /* PickerViewController.swift */,
+				27DAFAAF1F03F67000A3CD99 /* StationCell.swift */,
+				27DAFAB11F03F68900A3CD99 /* StationCell.xib */,
+				27DAFAAC1F03EE4B00A3CD99 /* PickerViewController.xib */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +184,8 @@
 				27DAFA9C1F03194C00A3CD99 /* MainViewController.swift in Sources */,
 				27DAFAB01F03F67000A3CD99 /* StationCell.swift in Sources */,
 				27DAFA9A1F03194C00A3CD99 /* AppDelegate.swift in Sources */,
+				27DAFAB61F045EFB00A3CD99 /* Station.swift in Sources */,
+				27DAFAB41F0458DC00A3CD99 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

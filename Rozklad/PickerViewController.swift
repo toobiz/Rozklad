@@ -16,13 +16,21 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     var searchString: String?
+    var api: API?
+    var stations: [AnyObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.isHidden = true
+//        tableView.isHidden = true
         spinner.isHidden = true
         searchBar.becomeFirstResponder()
+        stations = [AnyObject]()
+        
+        API.sharedInstance().downloadListOfStations { (success, stationNames, error) in
+            self.stations = stationNames
+            self.tableView.reloadData()
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -33,7 +41,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return (stations?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +49,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.register(UINib(nibName: "StationCell", bundle: nil), forCellReuseIdentifier: "StationCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as! StationCell
         
-        cell.stationName.text = searchString
+        cell.stationName.text = stations?[indexPath.row] as! String
         
         return cell
     }
@@ -52,6 +60,10 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dismiss(animated: true) {
             print("Picker closed")
         }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
     }
     
     // MARK: SearchBar delegate
@@ -69,7 +81,8 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func search(_: String) {
-        tableView.isHidden = false
+//        tableView.isHidden = false
+
     }
 }
 
