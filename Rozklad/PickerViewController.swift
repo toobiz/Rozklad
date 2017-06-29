@@ -18,20 +18,26 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchString: String?
     var api: API?
     var stations: [Station]?
+    var filteredData: [String]?
     var mainView: MainViewController?
     var stationIsFirst: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        tableView.isHidden = true
-        spinner.isHidden = true
+        tableView.isHidden = true
+//        spinner.isHidden = true
+        spinner.startAnimating()
         searchBar.becomeFirstResponder()
         stations = [Station]()
+//        filteredData = stations
         
         API.sharedInstance().downloadListOfStations { (success, stations, error) in
             self.stations = stations
-            self.tableView.reloadData()
+            DispatchQueue.main.async(execute: {
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+            });
         }
     }
 
@@ -68,7 +74,6 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
             mainView?.lastStation = station
             mainView?.lastStationButton.titleLabel?.text = station?.name
         }
-        print(station?.name)
 
         view.endEditing(true)
         dismiss(animated: true) {}
@@ -86,10 +91,12 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        searchString = searchText
+        let scope: String = "All"
+        stations = stations?.filter({(station : Station) -> Bool in
+            let categoryMatch = (scope == "All") || (station.name == scope)
+            return categoryMatch && station.name.range(of: searchText, options: .caseInsensitive) != nil
+        })
         tableView.reloadData()
-        search(searchText)
     }
     
     func search(_: String) {

@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
             let lastStationCoordinate = CLLocation(latitude: (lastStation?.latitude)!, longitude: (lastStation?.longitude)!)
             
             let distance = lastStationCoordinate.distance(from: firstStationCoordinate) / 1000
-            distanceLabel.text = String(distance) + "km"
+            distanceLabel.text = String(Int(distance)) + " km"
         }
     }
 
