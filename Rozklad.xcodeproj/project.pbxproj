@@ -18,6 +18,8 @@
 		27DAFAB21F03F68900A3CD99 /* StationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27DAFAB11F03F68900A3CD99 /* StationCell.xib */; };
 		27DAFAB41F0458DC00A3CD99 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAB31F0458DC00A3CD99 /* API.swift */; };
 		27DAFAB61F045EFB00A3CD99 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFAB51F045EFB00A3CD99 /* Station.swift */; };
+		27DAFABB1F05147500A3CD99 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFABA1F05147500A3CD99 /* CoreDataStackManager.swift */; };
+		27DAFABE1F05162D00A3CD99 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27DAFABC1F05162D00A3CD99 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		27DAFAB11F03F68900A3CD99 /* StationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationCell.xib; sourceTree = "<group>"; };
 		27DAFAB31F0458DC00A3CD99 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		27DAFAB51F045EFB00A3CD99 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		27DAFABA1F05147500A3CD99 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		27DAFABD1F05162D00A3CD99 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				27DAFAB51F045EFB00A3CD99 /* Station.swift */,
+				27DAFABA1F05147500A3CD99 /* CoreDataStackManager.swift */,
+				27DAFABC1F05162D00A3CD99 /* DataModel.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -181,8 +187,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				27DAFAAD1F03EE4B00A3CD99 /* PickerViewController.swift in Sources */,
+				27DAFABE1F05162D00A3CD99 /* DataModel.xcdatamodeld in Sources */,
 				27DAFA9C1F03194C00A3CD99 /* MainViewController.swift in Sources */,
 				27DAFAB01F03F67000A3CD99 /* StationCell.swift in Sources */,
+				27DAFABB1F05147500A3CD99 /* CoreDataStackManager.swift in Sources */,
 				27DAFA9A1F03194C00A3CD99 /* AppDelegate.swift in Sources */,
 				27DAFAB61F045EFB00A3CD99 /* Station.swift in Sources */,
 				27DAFAB41F0458DC00A3CD99 /* API.swift in Sources */,
@@ -350,6 +358,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		27DAFABC1F05162D00A3CD99 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				27DAFABD1F05162D00A3CD99 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 27DAFABD1F05162D00A3CD99 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 27DAFA8E1F03194B00A3CD99 /* Project object */;
 }

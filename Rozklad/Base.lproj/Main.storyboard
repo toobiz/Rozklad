@@ -103,6 +103,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tuX-nX-0Xu"/>
                     <connections>
+                        <outlet property="distanceLabel" destination="acf-M8-meF" id="dNx-5Q-XDL"/>
                         <outlet property="firstStationButton" destination="PLJ-gu-pPB" id="cqt-wK-1Sz"/>
                         <outlet property="lastStationButton" destination="18M-jg-U5K" id="yYi-WL-R2U"/>
                     </connections>

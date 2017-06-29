@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainViewController: UIViewController {
 
     @IBOutlet weak var firstStationButton: UIButton!
     @IBOutlet weak var lastStationButton: UIButton!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var firstStation: Station?
     var lastStation: Station?
@@ -24,6 +26,14 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if ((firstStation?.latitude) != nil) && ((firstStation?.longitude) != nil) && ((lastStation?.latitude) != nil) && lastStation?.longitude != nil {
+            
+            let firstStationCoordinate = CLLocation(latitude: (firstStation?.latitude)!, longitude: (firstStation?.longitude)!)
+            let lastStationCoordinate = CLLocation(latitude: (lastStation?.latitude)!, longitude: (lastStation?.longitude)!)
+            
+            let distance = lastStationCoordinate.distance(from: firstStationCoordinate) / 1000
+            distanceLabel.text = String(distance) + "km"
+        }
     }
 
     override func didReceiveMemoryWarning() {

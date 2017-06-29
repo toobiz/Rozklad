@@ -25,7 +25,7 @@ class Station: NSManagedObject {
     }
     
     init(dictionary: [String: AnyObject], context: NSManagedObjectContext) {
-        let entity =  NSEntityDescription.entity(forEntityName: "Quiz", in: context)!
+        let entity =  NSEntityDescription.entity(forEntityName: "Station", in: context)!
         super.init(entity: entity, insertInto: context)
         
         if let station_id = dictionary["id"] {

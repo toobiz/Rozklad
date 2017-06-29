@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class API: NSObject {
 
     var session: URLSession
-    var stations = [AnyObject]()
+    var stations = [Station]()
     
     override init() {
         session = URLSession.shared
@@ -27,7 +28,14 @@ class API: NSObject {
         return Singleton.sharedInstance
     }
     
-    func downloadListOfStations(completionHandler: @escaping (_ success: Bool, _ stations: [AnyObject], _ errorString: String?) -> Void) {
+    // MARK: - Core Data
+    
+    lazy var sharedContext: NSManagedObjectContext =  {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
+
+    
+    func downloadListOfStations(completionHandler: @escaping (_ success: Bool, _ stations: [Station], _ errorString: String?) -> Void) {
         
         let urlString = "https://koleo.pl/api/android/v1/stations.json"
         let request = NSMutableURLRequest(url: NSURL(string: urlString)! as URL)
@@ -43,24 +51,65 @@ class API: NSObject {
             }
             let parsedResponse = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
             
-//            self.stations = parsedResponse as! [AnyObject]
-//            print(self.stations)
-            
             guard let items = parsedResponse as? [[String:Any]] else {
                 print("Cannot find keys 'items' in parsedResponse")
                 return
             }
             
-//            print(items)
-            
-            var stations = [AnyObject]()
-            
             for item in items {
 //                print(item["name"])
-                stations.append(item["name"] as AnyObject)
+                
+                var idToAdd = NSNumber()
+                var nameToAdd = String()
+                var nameSlugToAdd = String()
+                var latitudeToAdd = Double()
+                var longitudeToAdd = Double()
+                var hitsToAdd = NSNumber()
+                var ibnrToAdd = NSNumber()
+                
+                if let id = item["id"] as? NSNumber {
+                    idToAdd = id
+                }
+                
+                if let name = item["name"] as? String {
+                    nameToAdd = name
+                }
+                
+                if let name_slug = item["name_slug"] as? String {
+                    nameSlugToAdd = name_slug
+                }
+                
+                if let latitude = item["latitude"] as? Double {
+                    latitudeToAdd = latitude
+                }
+                
+                if let longitude = item["longitude"] as? Double {
+                    longitudeToAdd = longitude
+                }
+                
+                if let hits = item["hits"] as? NSNumber {
+                    hitsToAdd = hits
+                }
+                
+                if let ibnr = item["ibnr"] as? NSNumber {
+                    ibnrToAdd = ibnr
+                }
+                
+                let stationDict: [String: AnyObject] = [
+                    "id" : idToAdd as AnyObject,
+                    "name" : nameToAdd as AnyObject,
+                    "name_slug" : nameSlugToAdd as AnyObject,
+                    "latitude" : latitudeToAdd as AnyObject,
+                    "longitude" : longitudeToAdd as AnyObject,
+                    "hits" : hitsToAdd as AnyObject,
+                    "ibnr" : ibnrToAdd as AnyObject
+                ]
+                
+                let stationToAdd = Station(dictionary: stationDict, context: self.sharedContext)
+                self.stations.append(stationToAdd)
             }
-            print(stations)
-            completionHandler(true, stations, nil)
+            
+            completionHandler(true, self.stations, nil)
         }
         task.resume()
     }

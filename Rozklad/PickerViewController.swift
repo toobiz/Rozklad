@@ -17,7 +17,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var searchString: String?
     var api: API?
-    var stations: [AnyObject]?
+    var stations: [Station]?
     var mainView: MainViewController?
     var stationIsFirst: Bool?
     
@@ -27,10 +27,10 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        tableView.isHidden = true
         spinner.isHidden = true
         searchBar.becomeFirstResponder()
-        stations = [AnyObject]()
+        stations = [Station]()
         
-        API.sharedInstance().downloadListOfStations { (success, stationNames, error) in
-            self.stations = stationNames
+        API.sharedInstance().downloadListOfStations { (success, stations, error) in
+            self.stations = stations
             self.tableView.reloadData()
         }
     }
@@ -51,25 +51,27 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.register(UINib(nibName: "StationCell", bundle: nil), forCellReuseIdentifier: "StationCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as! StationCell
         
-        cell.stationName.text = stations?[indexPath.row] as! String
+        let station = stations?[indexPath.row]
+        cell.stationName.text = station?.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("TableView tapped")
+        
+        let station = stations?[indexPath.row]
         
         if stationIsFirst == true {
-            mainView?.firstStationButton.titleLabel?.text = stations?[indexPath.row] as! String
+            mainView?.firstStation = station
+            mainView?.firstStationButton.titleLabel?.text = station?.name
         } else {
-            mainView?.lastStationButton.titleLabel?.text = stations?[indexPath.row] as! String
+            mainView?.lastStation = station
+            mainView?.lastStationButton.titleLabel?.text = station?.name
         }
-        
+        print(station?.name)
 
         view.endEditing(true)
-        dismiss(animated: true) {
-            print("Picker closed")
-        }
+        dismiss(animated: true) {}
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
