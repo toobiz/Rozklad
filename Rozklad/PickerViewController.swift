@@ -69,10 +69,10 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if stationIsFirst == true {
             mainView?.firstStation = station
-            mainView?.firstStationButton.titleLabel?.text = station?.name
+            mainView?.firstStationTextField.text = station?.name
         } else {
             mainView?.lastStation = station
-            mainView?.lastStationButton.titleLabel?.text = station?.name
+            mainView?.lastStationTextField.text = station?.name
         }
 
         view.endEditing(true)

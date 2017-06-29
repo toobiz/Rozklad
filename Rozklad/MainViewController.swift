@@ -9,10 +9,11 @@
 import UIKit
 import CoreLocation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var firstStationButton: UIButton!
-    @IBOutlet weak var lastStationButton: UIButton!
+
+    @IBOutlet weak var firstStationTextField: UITextField!
+    @IBOutlet weak var lastStationTextField: UITextField!
     @IBOutlet weak var distanceLabel: UILabel!
     
     var firstStation: Station?
@@ -41,14 +42,6 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didTapFirstStation(_ sender: Any) {
-        showPickerViewForStation(isFirst: true)
-    }
-    
-    @IBAction func didTapLastStation(_ sender: Any) {
-        showPickerViewForStation(isFirst: false)
-    }
-    
     func showPickerViewForStation(isFirst: Bool) {
         let pickerView = PickerViewController()
         pickerView.mainView = self
@@ -56,5 +49,13 @@ class MainViewController: UIViewController {
         present(pickerView, animated: true) {}
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == firstStationTextField {
+            showPickerViewForStation(isFirst: true)
+        } else {
+            showPickerViewForStation(isFirst: false)
+        }
+        return false
+    }
 }
 
