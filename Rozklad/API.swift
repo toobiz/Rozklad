@@ -56,8 +56,9 @@ class API: NSObject {
                 return
             }
             
+            self.stations.removeAll()
+            
             for item in items {
-//                print(item["name"])
                 
                 var idToAdd = NSNumber()
                 var nameToAdd = String()

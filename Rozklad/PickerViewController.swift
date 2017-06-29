@@ -18,7 +18,7 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var searchString: String?
     var api: API?
     var stations: [Station]?
-    var filteredData: [String]?
+    var filteredData: [Station]?
     var mainView: MainViewController?
     var stationIsFirst: Bool?
     
@@ -30,10 +30,11 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         spinner.startAnimating()
         searchBar.becomeFirstResponder()
         stations = [Station]()
-//        filteredData = stations
+        filteredData = [Station]()
         
         API.sharedInstance().downloadListOfStations { (success, stations, error) in
-            self.stations = stations
+            self.stations?.removeAll()
+            self.stations = stations.sorted(by: {$0.name < $1.name })
             DispatchQueue.main.async(execute: {
                 self.tableView.isHidden = false
                 self.tableView.reloadData()
@@ -49,6 +50,9 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchBar.text != "" {
+            return (filteredData?.count)!
+        }
         return (stations?.count)!
     }
     
@@ -57,22 +61,33 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.register(UINib(nibName: "StationCell", bundle: nil), forCellReuseIdentifier: "StationCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as! StationCell
         
-        let station = stations?[indexPath.row]
-        cell.stationName.text = station?.name
+        let station: Station
+        if searchBar.text != "" {
+            station = (filteredData?[indexPath.row])!
+        } else {
+            station = (stations?[indexPath.row])!
+        }
+        
+        cell.stationName.text = station.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let station = stations?[indexPath.row]
+        let station: Station
+        if searchBar.text != "" {
+            station = (filteredData?[indexPath.row])!
+        } else {
+            station = (stations?[indexPath.row])!
+        }
         
         if stationIsFirst == true {
             mainView?.firstStation = station
-            mainView?.firstStationTextField.text = station?.name
+            mainView?.firstStationTextField.text = station.name
         } else {
             mainView?.lastStation = station
-            mainView?.lastStationTextField.text = station?.name
+            mainView?.lastStationTextField.text = station.name
         }
 
         view.endEditing(true)
@@ -91,8 +106,9 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         let scope: String = "All"
-        stations = stations?.filter({(station : Station) -> Bool in
+        filteredData = stations?.filter({(station : Station) -> Bool in
             let categoryMatch = (scope == "All") || (station.name == scope)
             return categoryMatch && station.name.range(of: searchText, options: .caseInsensitive) != nil
         })
