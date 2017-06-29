@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var firstStationButton: UIButton!
     @IBOutlet weak var lastStationButton: UIButton!
     
+    var firstStation: Station?
+    var lastStation: Station?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,17 +32,19 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func didTapFirstStation(_ sender: Any) {
-        let pickerView = PickerViewController()
-        pickerView.mainView = self
-        present(pickerView, animated: true) {
-            
-        }
+        showPickerViewForStation(isFirst: true)
     }
     
     @IBAction func didTapLastStation(_ sender: Any) {
-        
+        showPickerViewForStation(isFirst: false)
     }
     
+    func showPickerViewForStation(isFirst: Bool) {
+        let pickerView = PickerViewController()
+        pickerView.mainView = self
+        pickerView.stationIsFirst = isFirst
+        present(pickerView, animated: true) {}
+    }
     
 }
 
