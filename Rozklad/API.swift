@@ -109,7 +109,14 @@ class API: NSObject {
                 let stationToAdd = Station(dictionary: stationDict, context: self.sharedContext)
                 self.stations.append(stationToAdd)
             }
+            CoreDataStackManager.sharedInstance().saveContext()
             
+            let date = Date()
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            let dateString = dateFormatter.string(from:date)
+            
+            UserDefaults.standard.setValue(date, forKey: "timestamp")
             completionHandler(true, self.stations, nil)
         }
         task.resume()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -22,6 +23,24 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var mainView: MainViewController?
     var stationIsFirst: Bool?
     
+    // MARK: - Core Data
+    
+    lazy var sharedContext: NSManagedObjectContext =  {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
+    
+    func fetchAllStations() -> [Station] {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Station")
+        
+        do {
+            return try sharedContext.fetch(fetchRequest) as! [Station]
+        } catch  let error as NSError {
+            print("Error in fetchAllQuizzes(): \(error)")
+            return [Station]()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,13 +51,27 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         stations = [Station]()
         filteredData = [Station]()
         
-        API.sharedInstance().downloadListOfStations { (success, stations, error) in
-            self.stations?.removeAll()
-            self.stations = stations.sorted(by: {$0.name < $1.name })
-            DispatchQueue.main.async(execute: {
-                self.tableView.isHidden = false
-                self.tableView.reloadData()
-            });
+        var timeInterval = Int()
+        let date = Date()
+
+        if let timeStamp = UserDefaults.standard.value(forKey: "timestamp") as? Date {
+            timeInterval = timeStamp.secondsBetweenDate(toDate: date)
+        }
+        
+        if timeInterval > 86400 || timeInterval == 0 {
+            API.sharedInstance().downloadListOfStations { (success, stations, error) in
+                self.stations?.removeAll()
+                self.stations = stations.sorted(by: {$0.name < $1.name })
+                DispatchQueue.main.async(execute: {
+                    self.tableView.isHidden = false
+                    self.tableView.reloadData()
+                });
+            }
+        } else {
+            stations?.removeAll()
+            stations = fetchAllStations().sorted(by: {$0.name < $1.name })
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
         }
     }
 
@@ -121,6 +154,12 @@ class PickerViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
+extension Date {
+    func secondsBetweenDate(toDate: Date) -> Int {
+        let components = Calendar.current.dateComponents([.second], from: self, to: toDate)
+        return components.second ?? 0
+    }
+}
 
 
 
